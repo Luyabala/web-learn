@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="vue.js"></script>
+    <title>getset</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <div v-for="item of list">{{item}}</div> -->
+        <!-- <div v-for="(item,index) of list" :key="index"> 不建议index作为key值 -->
+        <div v-for="item of list" :key="item.id">
+            {{item.text}}---{{item.id}}
+        </div>
+        <!-- 页面操作时，用push，pop，splice这些js操作时才能更新页面数据 -->
+
+    </div>
+    <br>
+    <br>
+    <!-- 对象的循环 -->
+    <div id="yoyo">
+        <div v-for="(item,key,index) of userinfo">
+            {{item}}--{{key}}--{{index}}
+        </div>
+        <!-- 直接重新赋值对象或者使用set方法进行修改，联动渲染 -->
+        <!-- Vue.set(vm.userinfo,"address","beijing") -->
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                list: [{
+                    text: "hello",
+                    id: "0001"
+                }, {
+                    text: "world",
+                    id: "0002"
+                }, {
+                    text: "this",
+                    id: "0003"
+                }, {
+                    text: "is",
+                    id: "0005"
+                }, {
+                    text: "a",
+                    id: "0006"
+                }, {
+                    text: "test",
+                    id: "0008"
+                }],
+
+            },
+
+
+        })
+        var vm = new Vue({
+            el: "#yoyo",
+            data: {
+                userinfo: {
+                    name: "hi",
+                    age: 12,
+                    gender: "female",
+                    salary: "50000"
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>

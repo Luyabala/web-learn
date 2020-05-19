@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="vue.js"></script>
+    <title>父子组件传值</title>
+</head>
+
+<body>
+    <div id="root">
+        <!-- is后表示调用哪个组件 -->
+        <component :is="type"></component>
+        <button @click="handleclick">change</button>
+    </div>
+
+    <script>
+        Vue.component('child-one',{ 
+            
+            // v-once将第一次出现的dom放入内存，而不需要重新创建渲染此组件，可提高静态内容的展示效率
+            template:'<div v-once>child-one</div>'
+        })
+        Vue.component('child-two',{
+            template:'<div v-once>child-two</div>'
+        })
+        var vm = new Vue({
+            el: '#root',
+            data:{
+                type:'child-one'
+            },
+            methods: {
+                handleclick:function(){
+                    this.type=(this.type==="child-one"?"child-two":"child-one")
+                }
+            }
+           
+        })
+
+    </script>
+</body>
+
+</html>

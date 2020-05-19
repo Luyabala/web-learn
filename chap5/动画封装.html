@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue.js"></script>
+    <title>VUE中的动画封装</title>
+</head>
+
+<body>
+    <div id="root">
+        <fade :show="show">
+            <h1>nice to meet you</h1>
+        </fade>
+        <button @click="handleclick">change</button>
+
+    </div>
+
+    <script>
+        Vue.component('fade', {
+            props: ['show'],
+            template:
+                `<transition @before-enter="handlebeforeenter" @enter="handleenter">
+                <slot v-if="show"></slot>
+            </transition>`,
+            methods: {
+                handlebeforeenter: function (el) {
+                    // el.style.opacity = 0
+                    el.style.color = 'red'
+                },
+                handleenter: function (el, done) {
+                    setTimeout(() => {
+                        // el.style.transition = "opacity 2s"
+                        // 不能实现
+                        el.style.color='blue'
+                        done()
+                    }, 2000)
+                }
+            }
+        })
+
+        var vm = new Vue({
+            el: '#root',
+            data: {
+                show: true
+            },
+            methods: {
+                handleclick: function () {
+                    this.show = !this.show
+
+                }
+            }
+
+        })
+
+    </script>
+</body>
+
+</html>

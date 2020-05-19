@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue基础练习</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <div>
+            <input v-model="inputValue"/>
+            <!-- 获取输入值为inputValue v-model双向数据绑定-->
+            <button @click="handleSubmit">提交</button>
+
+        </div>
+        <ul>
+            <todo-item
+                v-for="(item,index) of list"
+                :key="index"  
+                :content="item"
+                :index="index"
+                @delete="handleDelete"  
+               
+                
+            >
+            </todo-item> 
+            <!-- v-bind:""=:"" -->
+            <!-- v-on: 监听父组件中handeldelet方法 -->
+        </ul>
+    </div>
+    <script>
+        Vue.component('todo-item',{  //子组件即为vue实例
+            props:['content','index'],  //接受外部内容 从父组件接受content和index
+            template:'<li @click="handleClick">{{content}}</li>',//@click不能放在todo-item上
+            methods:{
+                handleClick:function(){
+                    // alert(this.index)
+                    this.$emit('delete',this.index)  //通知父组件
+                }
+            }
+        })
+        var vm = new Vue({          //父组件
+            el:"#root",
+            data:{
+                inputValue:'',
+                list:[]
+            },
+            // template不定义则会默认挂载点部分作为模板
+            methods:{
+                handleSubmit:function(){
+                    this.list.push(this.inputValue)
+                    this.inputValue=''
+                },
+                handleDelete:function(index){  //传参，$emit
+                    // alert(index)
+                    this.list.splice(index,1)//从下标位置删除一项
+                }
+            }
+        })
+    </script>
+    
+   
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="vue.js"></script>
+    <title>getset</title>
+    <style></style>
+</head>
+
+<body>
+    <div id="app">
+        <!--  :class="{activated:isActivated}"获取data中的isActivated-->
+        <!-- :class="[activated,activatedOne]"[变量] -->
+        <!-- :style="styleObj" 样式关联 -->
+        <!-- style="[styleObj]"由数组中的对象决定 -->
+        <div :style="[styleObj,{fontSize:'20px'}]" @click="handleDivClick">
+        
+            hello world
+        </div>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                firstname: "hello",
+                lastname: "world",
+                isActivated: false,
+
+                activated:"",
+                activatedOne:"activated-one",
+
+                styleObj:{
+                    color:"black"
+                }
+
+            },
+            methods: {
+                handleDivClick: function () {
+                    // this.isActivated = !this.isActivated;
+                    // this.activated=this.activated==="activated"?"":"activated"
+                    this.styleObj.color=this.styleObj.color==="black"?"red":"black"
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue.js"></script>
+    <title>列表过渡</title>
+    <style>
+        .v-enter,
+        .v-leave-to{
+            opacity: 0;
+        }
+        .v-enter-active,
+        .v-leave-active{
+            transition: opacity 2s;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root">
+        <!-- 尽量不要index作为key值 -->
+        <transition-group>
+            <div v-for="item of list" :key="item.id">第{{item.id}}条</div>
+            
+        </transition-group>
+        <button @click="handleclick">add</button>
+        
+    </div>
+
+    <script>
+        var count=1;
+        
+        var vm = new Vue({
+            el: '#root',
+            data:{
+                list:[]
+            },
+            methods: {
+                // 点击一次，增加一次数据
+                handleclick:function(){
+                    this.list.push({
+                        id:count++,
+                        title:'hellow world'
+                    })
+                }
+            }
+           
+        })
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue.js"></script>
+    <title>vue中CSS动画原理</title>
+    <style>
+        /* test为transition定义的name，不定义name时使用v-enter... */
+        .test-enter,
+        .test-leave-to {
+            opacity: 0;
+
+        }
+        .test-enter-active,
+        .test-leave-active {
+            transition: opacity 1s;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div id="root">
+        <!-- transition渐隐渐现效果 -->
+        <transition name="test">
+            <div v-if="show">hello world</div>
+        </transition>
+        <button @click="handleclick">change</button>
+    </div>
+
+    <script>
+
+        var vm = new Vue({
+            el: '#root',
+            data: {
+                show: true
+            },
+            methods: {
+                handleclick: function () {
+                    this.show = !this.show
+                    console.log(this.show)
+                }
+            }
+
+        })
+
+    </script>
+</body>
+
+</html>

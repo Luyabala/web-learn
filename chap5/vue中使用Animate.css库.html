@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="../animate.min.css">
+    
+    <title>使用Animate.css库</title>
+</head>
+
+<body>
+    <div id="root">
+        <!-- 不用默认格式，自定义渐隐渐现样式名 -->
+        <!-- <transition name="fade" enter-active-class="active" leave-active-class="leave"> -->
+            <!-- enter-active-class无效果？？？ -->
+            <transition 
+            :duration="{enter:5000}"
+            enter-active-class="animate bounceIn" leave-active-class="animate bounceOut">
+                <h1 v-if="show">hello world</h1>
+            </transition>
+            <button @click="handleclick">change</button>
+        </div>
+    
+        <script>
+    
+            var vm = new Vue({
+                el: '#root',
+                data: {
+                    show: true
+                },
+                methods: {
+                    handleclick: function () {
+                        this.show = !this.show
+                        console.log(this.show)
+                    }
+                }
+    
+            })
+    </script>
+</body>
+
+</html>

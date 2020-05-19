@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="vue.js"></script>
+    <title>给组件吧绑定原生事件</title>
+</head>
+
+<body>
+    <div id="root">
+        <child @click.native="handleclick"></child>  
+        <!-- .native监听不是自定义事件，是原生事件 -->
+        
+        
+    </div>
+
+    <script>
+        Vue.component('child',{
+            template:'<div >child</div>',//@click="hancleChildClick"
+            // methods: {
+            //     handleChildClick:function(){
+            //         this.$emit('click')
+            //     }
+            // }
+        })
+        
+        var vm = new Vue({
+            el: '#root',
+            methods: {
+                handleclick:function(){
+                    alert('click')
+                }
+            }
+           
+        })
+
+    </script>
+</body>
+
+</html>

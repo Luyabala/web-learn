@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="vue.js"></script>
+    <title>getset</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <div v-if="show" data-test="v-if">{{message}}</div> -->
+        <!-- v-if删除dom，增加dom，性能更低 -->
+        <!-- <div v-else="show">byebye</div> -->
+        <!-- v-if、v-else需要靠在一起 -->
+
+        <!-- <div v-show="show" data-test="v-show">{{message}}</div> -->
+       
+        <!-- <div v-if="show==='a'">This is a</div>
+        <div v-else-if="show==='b'">This is b</div>
+        <div v-else>Others</div> -->
+        
+        <div v-if="show">用户名：<input key="username"></div>
+        <div v-else>密码：<input key="password"></div>
+        <!-- 使用key值使dom更新时input一起更新，不加key不能保证input的唯一性 -->
+        
+
+        
+    </div>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                // show: false,
+                // show: 'a',
+                show:true,
+                message:"hello world"
+            },
+            methods: {
+            handleDivClick: function () {
+                // this.isActivated = !this.isActivated;
+                // this.activated=this.activated==="activated"?"":"activated"
+                
+            }
+        }
+        })
+    </script>
+
+</body>
+
+</html>

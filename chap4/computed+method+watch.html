@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue实例生命周期函数</title>
+    <script src="vue.js"></script>
+</head>
+
+<body> 
+    <div id="app">{{fullname()}}{{age}}</div>
+    <!-- 
+        {{name}}插值表达式
+        <div v-text="name"+""></div>
+        <div v-html="name"></div> 可识别html标签
+        v-bind:title="name"    
+    -->
+    <script>   
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                firstname: "hello",
+                lastname:"world",
+                age:66
+            },
+            // 计算属性 firstname,lastname没有改变时，直接用之前的结果，不重新调用(用age实验)，最优！
+            computed: {
+                fullname:function(){
+                    console.log("计算一次")
+                    return this.firstname+" "+this.lastname
+                }
+            },
+            methods:{
+                //属性值改变
+                fullname:function(){
+                    console.log("计算一次")
+                    return this.firstname+" "+this.lastname
+                }
+            },
+            // 监听器 类似computed 都有缓存机制
+            watch:{
+                firstname:function(){
+                    console.log("计算一次")
+                    return this.firstname+" "+this.lastname;
+                },
+                lastname:function(){
+                    console.log("计算一次")
+                    return this.firstname+" "+this.lastname;
+                }
+
+            }
+        })
+    </script>
+
+</body>
+
+</html>

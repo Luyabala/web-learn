@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue.js"></script>
+    <link rel="stylesheet" type="text/css" href="../animate.min.css">
+    <title>同时使用过渡和动画</title>
+    <style>
+        /* test为transition定义的name，不定义name时使用v-enter... */
+        .test-enter,
+        .test-leave-to {
+            opacity: 0;
+
+        }
+        .test-enter-active,
+        .test-leave-active {
+            transition: opacity 5s;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root">
+        
+            <!-- type="transition"以transition为基准，时间 -->
+            <!-- :duration="{enter:10000,leave:10000}"为此dom展示的时间 -->
+            <!-- animated!!! -->
+            <transition                 
+                type="transition"
+                name="test"            
+                appear
+                enter-active-class="animated swing test-enter-active" 
+                leave-active-class="animated shake test-leave-active"
+                appear-active-class="animated bounceIn test-enter-active">
+                <h1 v-if="show">hello world</h1>
+            </transition>
+            <button @click="handleclick">change</button>
+        </div>
+    
+        <script>
+    
+            var vm = new Vue({
+                el: '#root',
+                data: {
+                    show: true
+                },
+                methods: {
+                    handleclick: function () {
+                        this.show = !this.show
+                        // console.log(this.show)
+                    }
+                }
+    
+            })
+    </script>
+</body>
+
+</html>

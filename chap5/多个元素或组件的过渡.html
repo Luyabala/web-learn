@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue.js"></script>
+    <title>多个元素或组件的过渡</title>
+    <style>
+        /* test为transition定义的name，不定义name时使用v-enter... */
+        .test-enter,
+        .test-leave-to {
+            opacity: 0;
+
+        }
+        .test-enter-active,
+        .test-leave-active {
+            transition: opacity 2s;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root">
+        <!-- mode="in-out"/out-in 控制切换效果-->
+        <!-- 使用key值避免复用，才能达到渐隐渐现效果 -->
+        <transition name="test" mode="out-in" key="hello">
+            <!-- 元素的过渡 -->
+            <!-- <div v-if="show" key="bye">hello world</div>
+            <div v-else>byebye</div> -->
+
+            <!-- 组件的过渡 -->
+            <!-- is属性 -->
+            <component :is='type'></component>
+
+        </transition>
+        <button @click="handleclick">change</button>
+
+    </div>
+
+    <script>
+        Vue.component("child-one",{
+            template:'<div>child-one</div>'
+        })
+        Vue.component("child-two",{
+            template:'<div>child-two</div>'
+        })
+
+        var vm = new Vue({
+            el: '#root',
+            data: {
+                // show: true
+                type:'child-one'
+            },
+            methods: {
+                handleclick: function () {
+                    this.type = this.type==='child-one'?'child-two':'child-one'
+                }
+                
+
+            }
+
+
+        })
+
+    </script>
+</body>
+
+</html>
